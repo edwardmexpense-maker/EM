@@ -18,7 +18,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-sa_info = json.loads(st.secrets["google_service_account"]["key"])
+sa_info = dict(st.secrets["google_service_account"])
+
 
 creds = Credentials.from_service_account_info(
     sa_info,
