@@ -13,13 +13,16 @@ st.markdown(
     div[data-baseweb="select"] > div { background-color: #FFFFFF !important; border: 1px solid #9CA3AF !important; }
     [data-testid="stSuccess"] { background-color: #ECFDF5 !important; color: #10B981 !important; }
     label { color: #000000 !important; }
+    /* Extra: enforce black text on all Streamlit labels/headers */
+    .stMarkdown, .stText, .stSelectbox label, .stTextInput label, .stRadio label {
+        color: #000000 !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
 sa_info = dict(st.secrets["google_service_account"])
-
 
 creds = Credentials.from_service_account_info(
     sa_info,
@@ -72,8 +75,8 @@ for col in range(len(main_row)):
             subs.append(r[col].strip())
     heads.setdefault(t, {})[main] = subs or ["Other"]
 
-st.title("EM Expense Tracker")
-st.subheader(f"{indian_greeting()}, EM 👋")
+st.title("Edward Expense Tracker")
+st.subheader(f"{indian_greeting()}, Edward 👋")
 
 t_type = st.selectbox("Type", ["Income", "Expense"], index=1)
 main = st.selectbox("Main Head", tuple(heads[t_type].keys()))
