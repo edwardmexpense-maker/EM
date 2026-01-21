@@ -13,10 +13,10 @@ st.markdown(
     div[data-baseweb="select"] > div { background-color: #FFFFFF !important; border: 1px solid #9CA3AF !important; }
     [data-testid="stSuccess"] { background-color: #ECFDF5 !important; color: #10B981 !important; }
     label { color: #000000 !important; }
-    /* Extra: enforce black text on all Streamlit labels/headers */
-    .stMarkdown, .stText, .stSelectbox label, .stTextInput label, .stRadio label {
-        color: #000000 !important;
-    }
+    /* Force ALL selectbox/radio text black */
+    .stSelectbox label, .stRadio label, [data-baseweb="select"] label, 
+    div[data-baseweb="select"] div, .rc-virtual-list * { color: #000000 !important; }
+    .stRadio > div > label { color: #000000 !important; }
     </style>
     """,
     unsafe_allow_html=True
@@ -80,7 +80,7 @@ st.subheader(f"{indian_greeting()}, Edward 👋")
 
 t_type = st.selectbox("Type", ["Income", "Expense"], index=1)
 main = st.selectbox("Main Head", tuple(heads[t_type].keys()))
-sub = st.selectbox("Sub Head", tuple(heads[t_type][main]))
+sub = st.radio("Sub Head", tuple(heads[t_type][main]), horizontal=True)
 narration = st.text_input("Narration (optional)")
 amount = st.text_input("Amount")
 
